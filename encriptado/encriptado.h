@@ -1,7 +1,8 @@
-#ifndef ENCRIPTADO_H__
-#define ENCRIPTADO_H__
+#ifndef ENCRIPTADO_H_
+#define ENCRIPTADO_H_
 
 
-char* encriptar(char* contrasenha);
-char* desencriptar(char* contrasenha);
+void encriptar(char* contrasenha);
+void desencriptar(char* contrasenha);
+
 #endif
