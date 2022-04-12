@@ -73,3 +73,74 @@ void printTablero(Casilla c[100]) {
 		printf("\n");
 	}
 }
+
+void generarBarcos(Barco b[3]) {
+    char str[MAX_LINEAS];
+    char letra;
+    int num;
+	Casilla c;
+	Barco bar;
+    for(int i = 0; i < 3; i++) {
+		for(int j = 0; j < 3; j++) {
+			printf("Letra (A-J):\n");
+    		fgets(str, MAX_LINEAS, stdin);
+    		sscanf(str, "%c", &letra);
+    		fflush(stdin);
+    		fflush(stdout);
+    		printf("Numero (1-10):\n");
+    		fgets(str, MAX_LINEAS, stdin);
+    		sscanf(str, "%i", &num);
+    		fflush(stdin);
+    		fflush(stdout);
+			c.letra = letra;
+			c.num = num;
+			c.estado = 0;
+			bar.piezas[j] = c;
+		}
+		bar.size = 3;
+		bar.estado = 0;
+		b[i] = bar;
+    }
+}
+
+void partida(Barco b[3], Casilla c[100]) {
+	while((b[1].estado + b[0].estado + b[2].estado) != 3) {
+		int boo = 0;
+		char str[MAX_LINEAS];
+    	char letra;
+    	int num;
+		printf("\nSelecciona una casilla para disparar\n");
+		printf("Letra (A-J):\n");
+    	fgets(str, MAX_LINEAS, stdin);
+    	sscanf(str, "%c", &letra);
+    	fflush(stdin);
+    	fflush(stdout);
+    	printf("Numero (1-10):\n");
+    	fgets(str, MAX_LINEAS, stdin);
+    	sscanf(str, "%i", &num);
+   		fflush(stdin);
+    	fflush(stdout);
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 3; j++) {
+				if(b[i].piezas[j].letra == letra && b[i].piezas[j].num == num) {
+					b[i].piezas[j].estado = -1;
+					boo = 1;
+				}
+			}
+			if((b[i].piezas[0].estado + b[i].piezas[1].estado + b[i].piezas[2].estado) == -3) {
+				b[i].estado = 1;
+			}
+		}
+		for(int i = 0; i < 100; i++) {
+			if(c[i].letra == letra && c[i].num == num) {
+				if(boo == 1) {
+					c[i].estado = -1;
+				} else {
+					c[i].estado = 1;
+				}
+			}
+		}
+		printTablero(c);
+	}
+	printf("Fin de Partida\n");
+}
