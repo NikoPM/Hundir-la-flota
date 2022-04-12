@@ -1,4 +1,4 @@
-#include "modulos/encriptado.h"
+#include "encriptado.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
