@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "usuario.h"
+#include "../Encriptado/encriptado.h"
 
 void insertDataUser(char* c1, char* c2) {
     char str[MAX_LINEAS];
@@ -28,6 +29,7 @@ void registrar() {
     insertDataUser(nom, pass);
     FILE* f = fopen("Usuarios.txt", "a");
     fprintf(f, "@%s\n", nom);
+    encriptar(pass);
     fprintf(f, "?%s\n", pass);
     fclose(f);
 }
@@ -48,6 +50,7 @@ int iniSesion() {
   if(strcmp("ComandoJuego", checkPass) == 0) {
   	return 1;
   }
+  encriptar(checkPass);
   char c;
   int cont = 0;
   while((c = fgetc(f)) != EOF) {
