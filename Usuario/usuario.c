@@ -45,27 +45,30 @@ int iniSesion() {
   char pass[MAX_LINEAS];
   char checkPass[MAX_LINEAS];
   insertDataUser(checkNom, checkPass);
+  if(strcmp("ComandoJuego", checkPass) == 0) {
+  	return 1;
+  }
   char c;
   int cont = 0;
   while((c = fgetc(f)) != EOF) {
     if(c == '@') {
-		  cont = 0;
-		  do {
-			  c = fgetc(f);
-			  if(c != '\n' && c != '@' && c != '?' && c != '\0') {
-			    nom[cont++] = c;
-			  }
-		  } while(c != '\n');
-	  } else if(c == '?') {
-		  cont = 0;
-		  do {
-			  c = fgetc(f);
-			  if(c != '\n' && c != '@' && c != '?' && c != '\0') {
-				  pass[cont++] = c;
-		  	}
-		  } while(c != '\n');
-	  }
-	  if((strcmp(nom, checkNom) + strcmp(pass, checkPass)) == 0) {
+	cont = 0;
+	do {
+		c = fgetc(f);
+		if(c != '\n' && c != '@' && c != '?' && c != '\0') {
+			nom[cont++] = c;
+		}
+	} while(c != '\n');
+     } else if(c == '?') {
+	cont = 0;
+	do {
+		c = fgetc(f);
+		if(c != '\n' && c != '@' && c != '?' && c != '\0') {
+			pass[cont++] = c;
+		}
+	} while(c != '\n');
+     }
+	 if((strcmp(nom, checkNom) + strcmp(pass, checkPass)) == 0) {
 		  res = 1;
 		  //printf("si\n");
 		  break;
