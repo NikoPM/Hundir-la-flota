@@ -16,9 +16,13 @@ void opciones(char c) {
 		Casilla c[100];
 		generarTablero(c);
 		printTablero(c);
-	  } else {
-		printf("Usuario o Contrasena Incorrectos\n");
-	  }
+        Barco bJ[3];
+        printf("Posiciona tus barcos:\n");
+        generarBarcos(bJ);
+        partida(bJ, c);
+	    } else {
+	        printf("Usuario o Contrasena Incorrectos\n");
+	    }
     } else if(c == 'd') {
 	  vaciar();
     }
