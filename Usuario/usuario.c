@@ -4,6 +4,8 @@
 
 #include "usuario.h"
 #include "../Encriptado/encriptado.h"
+#include "../BBDD/bbdd.h"
+#include "../BBDD/sqlite3.h"
 
 void insertDataUser(char* c1, char* c2) {
     char str[MAX_LINEAS];
@@ -27,6 +29,7 @@ void registrar() {
     char nom[MAX_LINEAS];
     char pass[MAX_LINEAS];
     insertDataUser(nom, pass);
+    insertarData(nom, pass);
     FILE* f = fopen("Usuarios.txt", "a");
     fprintf(f, "@%s\n", nom);
     encriptar(pass);

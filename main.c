@@ -2,6 +2,10 @@
 
 #include "Usuario/usuario.h"
 #include "Barco/barco.h"
+#include "BBDD/bbdd.h"
+#include "BBDD/sqlite3.h"
+
+#define DATABASE 1
 
 void menu() {
     printf("\n1. Registrar Usuario.\n2. Iniciar Sesion.\n3. Salir.\n");
@@ -25,10 +29,15 @@ void opciones(char c) {
 	    }
     } else if(c == 'd') {
 	  vaciar();
+    } else if(c == 'v') {
+	  mostrarData();
     }
 }
 
 int main(void) {
+    if(DATABASE == 1) {
+	crearTablas();
+    }
     char str[10];
     char c;
     do {
