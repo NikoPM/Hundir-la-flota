@@ -7,5 +7,6 @@ int crearTablas();
 int insertarData(char* nom, char* pass);
 int llamada(void *, int, char **, char **);
 int mostrarData();
+int checkPass(char* nom, char* pass);
 
 #endif

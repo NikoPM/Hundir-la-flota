@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "barco.h"
 
@@ -74,6 +75,7 @@ void printTablero(Casilla c[100]) {
 	}
 }
 
+/*
 void generarBarcos(Barco b[3]) {
     char str[MAX_LINEAS];
     char letra;
@@ -101,10 +103,60 @@ void generarBarcos(Barco b[3]) {
 		bar.estado = 0;
 		b[i] = bar;
     }
+}*/
+
+void generarBarcos(Barco b[3]) {
+	int fil = 64;
+	int col = 0;
+	Casilla casArr[9];
+	Casilla cas;
+	int num = 0;
+	srand(time(0));
+	int randNum = (rand() % (4 - 1 + 1)) + 1;
+	//printf("Rand: %i\n", randNum);
+	FILE* f = fopen("Tableros.txt", "r");
+	char c;
+	while ((c = fgetc(f)) != EOF) {
+		if (c == randNum + '0') {
+			while (c != (randNum + 1) + '0') {
+				if (c == '~' || c == 'x') {
+					col += 1;
+					if (col > 10) {
+						col = 1;
+					}
+					if (c == 'x') {
+						cas.letra = fil;
+						cas.num = col;
+						cas.estado = 0;
+						casArr[num++] = cas;
+					}
+				}
+				else if (c == '\n') {
+					fil += 1;
+				}
+				c = fgetc(f);
+			}
+		}
+		c = fgetc(f);
+	}
+	fclose(f);
+	num = 0;
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			b[i].piezas[j] = casArr[num++];
+			b[i].size = 3;
+			b[i].estado = 0;
+			//printf("C%i: %c, %i\n", num, b[i].piezas[j].letra, b[i].piezas[j].num);
+		}
+	}
 }
 
+
 void partida(Barco b[3], Casilla c[100]) {
-	while((b[1].estado + b[0].estado + b[2].estado) != 3) {
+	int intentos = 25;
+	while(((b[1].estado + b[0].estado + b[2].estado) != 3) && intentos > 0) {
+		intentos -= 1;
+		printf("I: %i\n", intentos);
 		int boo = 0;
 		char str[MAX_LINEAS];
     	char letra;

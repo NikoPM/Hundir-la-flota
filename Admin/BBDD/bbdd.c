@@ -19,7 +19,7 @@ int crearTablas() {
     
     char *sql = "DROP TABLE IF EXISTS Usuario;" 
                 "CREATE TABLE Usuario(Name TEXT, Pass TEXT, Loc INT);" 
-                "INSERT INTO Usuario VALUES('juan', 'juan', 1);";
+                "INSERT INTO Usuario VALUES('juan', 'mxdq', 1);";
 
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
     
@@ -50,8 +50,8 @@ int crearTablas() {
     } 
 
 	sql = "DROP TABLE IF EXISTS Partida;" 
-                "CREATE TABLE Partida(Id INT, Punt INT, Jug TEXT);" 
-                "INSERT INTO Partida VALUES(1, 10, 'juan');";
+                "CREATE TABLE Partida(TipoBarco INT, Jug TEXT);" 
+                "INSERT INTO Partida VALUES(1, 'juan');";
 
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
     
@@ -66,8 +66,11 @@ int crearTablas() {
     } 
 
 	sql = "DROP TABLE IF EXISTS Barco;" 
-                "CREATE TABLE Barco(Tipo TEXT, Partida INT);" 
-                "INSERT INTO Barco VALUES('Mediano', 1);";
+                "CREATE TABLE Barco(Tipo TEXT);" 
+                "INSERT INTO Barco VALUES('1');"
+                "INSERT INTO Barco VALUES('2');"
+                "INSERT INTO Barco VALUES('3');"
+                "INSERT INTO Barco VALUES('4');";
 
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
     
@@ -170,5 +173,55 @@ int mostrarData() {
     
     sqlite3_close(db);
     
+    return 0;
+}
+
+int checkPass(char* nom, char* pass) {
+    sqlite3* db;
+    char* err_msg = 0;
+    sqlite3_stmt* res;
+
+    int rc = sqlite3_open("data.db", &db);
+
+    if (rc != SQLITE_OK) {
+
+        fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+
+        return 1;
+    }
+
+    char sql[100] = "SELECT Name, Pass FROM Usuario WHERE Name = '";
+    strcat(sql, nom);
+    strcat(sql, "'");
+
+    rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
+
+    if (rc == SQLITE_OK) {
+
+        sqlite3_bind_int(res, 1, 3);
+    }
+    else {
+
+        fprintf(stderr, "Failed to execute statement: %s\n", sqlite3_errmsg(db));
+    }
+
+    int step = sqlite3_step(res);
+
+    int comp = 1;
+
+    if (step == SQLITE_ROW) {
+
+        comp = strcmp(nom, sqlite3_column_text(res, 0));
+        comp += strcmp(pass, sqlite3_column_text(res, 1));
+    } 
+
+    sqlite3_finalize(res);
+    sqlite3_close(db);
+
+    if (comp != 0) {
+        return 1;
+    }
+
     return 0;
 }

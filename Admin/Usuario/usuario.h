@@ -3,9 +3,8 @@
 
 #define MAX_LINEAS 15
 
-void insertDataUser();
+void insertDataUser(char* c1, char* c2);
 void registrar();
-void vaciar();
 int iniSesion();
 
 #endif

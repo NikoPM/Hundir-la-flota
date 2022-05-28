@@ -15,20 +15,17 @@ void opciones(char c) {
     if(c == '1') {
         registrar();
     } else if(c == '2') {
-        if(iniSesion() == 1) {
-		printf("\nJuego: \n");
-		Casilla c[100];
-		generarTablero(c);
-		printTablero(c);
-        Barco bJ[3];
-        printf("Posiciona tus barcos:\n");
-        generarBarcos(bJ);
-        partida(bJ, c);
+        if(iniSesion() == 0) {
+		    printf("\nJuego: \n");
+		    Casilla c[100];
+		    generarTablero(c);
+		    printTablero(c);
+            Barco bJ[3];
+            generarBarcos(bJ);
+            partida(bJ, c);
 	    } else {
 	        printf("Usuario o Contrasena Incorrectos\n");
 	    }
-    } else if(c == 'd') {
-	  vaciar();
     } else if(c == 'v') {
 	  mostrarData();
     }
@@ -36,7 +33,7 @@ void opciones(char c) {
 
 int main(void) {
     if(DATABASE == 1) {
-	crearTablas();
+	    crearTablas();
     }
     char str[10];
     char c;
