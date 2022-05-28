@@ -75,35 +75,19 @@ void printTablero(Casilla c[100]) {
 	}
 }
 
-/*
-void generarBarcos(Barco b[3]) {
-    char str[MAX_LINEAS];
-    char letra;
-    int num;
-	Casilla c;
-	Barco bar;
-    for(int i = 0; i < 3; i++) {
-		for(int j = 0; j < 3; j++) {
-			printf("Letra (A-J):\n");
-    		fgets(str, MAX_LINEAS, stdin);
-    		sscanf(str, "%c", &letra);
-    		fflush(stdin);
-    		fflush(stdout);
-    		printf("Numero (1-10):\n");
-    		fgets(str, MAX_LINEAS, stdin);
-    		sscanf(str, "%i", &num);
-    		fflush(stdin);
-    		fflush(stdout);
-			c.letra = letra;
-			c.num = num;
-			c.estado = 0;
-			bar.piezas[j] = c;
-		}
-		bar.size = 3;
-		bar.estado = 0;
-		b[i] = bar;
-    }
-}*/
+void pedirBarcos() {
+	char str[MAX_LINEAS];
+	for (int i = 0; i < 9; i++) {
+		printf("Letra (A-J):\n");
+		fgets(str, MAX_LINEAS, stdin);
+		fflush(stdin);
+		fflush(stdout);
+		printf("Numero (1-10):\n");
+		fgets(str, MAX_LINEAS, stdin);
+		fflush(stdin);
+		fflush(stdout);
+	}
+}
 
 void generarBarcos(Barco b[3]) {
 	int fil = 64;

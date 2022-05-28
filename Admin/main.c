@@ -19,6 +19,7 @@ void opciones(char c) {
 		    printf("\nJuego: \n");
 		    Casilla c[100];
 		    generarTablero(c);
+            pedirBarcos();
 		    printTablero(c);
             Barco bJ[3];
             generarBarcos(bJ);
