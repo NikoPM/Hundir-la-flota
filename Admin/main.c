@@ -4,6 +4,7 @@
 #include "Barco/barco.h"
 #include "BBDD/bbdd.h"
 #include "BBDD/sqlite3.h"
+#include "Logger/logger.h"
 
 #define DATABASE 1
 
@@ -14,8 +15,10 @@ void menu() {
 void opciones(char c) {
     if(c == '1') {
         registrar();
+        loggear("Usuario Registrado con exito\n");
     } else if(c == '2') {
         if(iniSesion() == 0) {
+            loggear("Inicio Sesion exitoso\n");
 		    printf("\nJuego: \n");
 		    Casilla c[100];
 		    generarTablero(c);
@@ -23,12 +26,16 @@ void opciones(char c) {
 		    printTablero(c);
             Barco bJ[3];
             generarBarcos(bJ);
+            loggear("Partida Iniciada\n");
             partida(bJ, c);
+            loggear("Partida Finalizada\n");
 	    } else {
 	        printf("Usuario o Contrasena Incorrectos\n");
+            loggear("Inicio Sesion fallido\n");
 	    }
     } else if(c == 'v') {
-	  mostrarData();
+	    mostrarData();
+        loggear("Mostrado Datos de la base\n");
     }
 }
 
@@ -38,6 +45,7 @@ int main(void) {
     }
     char str[10];
     char c;
+    iniciarLogger();
     do {
         menu();
         fgets(str, 10, stdin);
@@ -46,5 +54,6 @@ int main(void) {
         fflush(stdout);
         opciones(c);
     } while(c != '3');
+    loggear("Programa cerrado\n\n");
     return 0;
 }
