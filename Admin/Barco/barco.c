@@ -98,7 +98,7 @@ void generarBarcos(Barco b[3]) {
 	srand(time(0));
 	int randNum = (rand() % (4 - 1 + 1)) + 1;
 	//printf("Rand: %i\n", randNum);
-	FILE* f = fopen("Tableros.txt", "r");
+	FILE* f = fopen("../Tableros.txt", "r");
 	char c;
 	while ((c = fgetc(f)) != EOF) {
 		if (c == randNum + '0') {
@@ -140,7 +140,6 @@ void partida(Barco b[3], Casilla c[100]) {
 	int intentos = 25;
 	while(((b[1].estado + b[0].estado + b[2].estado) != 3) && intentos > 0) {
 		intentos -= 1;
-		printf("I: %i\n", intentos);
 		int boo = 0;
 		char str[MAX_LINEAS];
     	char letra;

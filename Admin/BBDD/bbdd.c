@@ -7,7 +7,7 @@ int crearTablas() {
     sqlite3 *db;
     char *err_msg = 0;
     
-    int rc = sqlite3_open("data.db", &db);
+    int rc = sqlite3_open("../data.db", &db);
     
     if (rc != SQLITE_OK) {
         
@@ -93,7 +93,7 @@ int insertarData(char* nom, char* pass) {
 	sqlite3 *db;
     char *err_msg = 0;
     
-    int rc = sqlite3_open("data.db", &db);
+    int rc = sqlite3_open("../data.db", &db);
     
     if (rc != SQLITE_OK) {
         
@@ -145,7 +145,7 @@ int mostrarData() {
 	sqlite3 *db;
     char *err_msg = 0;
     
-    int rc = sqlite3_open("data.db", &db);
+    int rc = sqlite3_open("../data.db", &db);
     
     if (rc != SQLITE_OK) {
         
@@ -181,7 +181,7 @@ int checkPass(char* nom, char* pass) {
     char* err_msg = 0;
     sqlite3_stmt* res;
 
-    int rc = sqlite3_open("data.db", &db);
+    int rc = sqlite3_open("../data.db", &db);
 
     if (rc != SQLITE_OK) {
 
