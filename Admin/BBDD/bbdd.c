@@ -50,8 +50,8 @@ int crearTablas() {
     } 
 
 	sql = "DROP TABLE IF EXISTS Partida;" 
-                "CREATE TABLE Partida(TipoBarco INT, Jug TEXT);" 
-                "INSERT INTO Partida VALUES(1, 'juan');";
+                "CREATE TABLE Partida(TipoBarco TEXT, Jug TEXT);" 
+                "INSERT INTO Partida VALUES('1', 'juan');";
 
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
     
@@ -155,8 +155,10 @@ int mostrarData() {
         
         return 1;
     }
+
+    printf("\n");
     
-    char *sql = "SELECT * FROM Usuario";
+    char sql[100] = "SELECT * FROM Usuario";
         
     rc = sqlite3_exec(db, sql, llamada, 0, &err_msg);
     
@@ -170,6 +172,21 @@ int mostrarData() {
         
         return 1;
     } 
+
+    strcpy(sql, "SELECT * FROM Partida");
+
+    rc = sqlite3_exec(db, sql, llamada, 0, &err_msg);
+
+    if (rc != SQLITE_OK) {
+
+        fprintf(stderr, "Failed to select data\n");
+        fprintf(stderr, "SQL error: %s\n", err_msg);
+
+        sqlite3_free(err_msg);
+        sqlite3_close(db);
+
+        return 1;
+    }
     
     sqlite3_close(db);
     
