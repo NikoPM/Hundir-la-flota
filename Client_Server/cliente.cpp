@@ -62,10 +62,78 @@ int main(void) {
             sscanf(recvBuff, "%c", &dev);
 
             if (dev == '1') {
-                
+                char name[MAX_LINEAS];
+                char pass[MAX_LINEAS];
+                cout << "Nombre Usuario:\n";
+                cin >> name;
+                cout << "Contrasena Usuario:\n ";
+                cin >> pass;
+                cout << endl;
+                sprintf(sendBuff, "%s", name);
+                send(s, sendBuff, sizeof(sendBuff), 0);
+                sprintf(sendBuff, "%s", pass);
+                send(s, sendBuff, sizeof(sendBuff), 0);
+                continue;
             }
             else if (dev == '2') {
-               
+                char name[MAX_LINEAS];
+                char pass[MAX_LINEAS];
+                cout << "Nombre Usuario:\n";
+                cin >> name;
+                cout << "Contrasena Usuario:\n ";
+                cin >> pass;
+                cout << endl;
+                sprintf(sendBuff, "%s", name);
+                send(s, sendBuff, sizeof(sendBuff), 0);
+                sprintf(sendBuff, "%s", pass);
+                send(s, sendBuff, sizeof(sendBuff), 0);
+
+                recv(s, recvBuff, sizeof(recvBuff), 0);
+                sscanf(recvBuff, "%c", &dev);
+
+                if (dev == '0') {
+                    cout << "\nJuego: " << endl;
+                    cout << "Posiciona tus Barcos" << endl;
+                    char str[MAX_LINEAS];
+                    for (int i = 0; i < 9; i++) {
+                        cout << "Letra (A-J):" << endl;
+                        cin >> str;
+                        strcpy(str, "");
+                        cout << "Numero (1-10):" << endl;
+                        cin >> str;
+                        strcpy(str, "");
+                    }
+                    while (dev != 'F') {
+                        char letra;
+                        int num;
+                        cout << "\nSelecciona una casilla para disparar\n" << endl;
+                        cout << "Letra (A-J):" << endl;
+                        cin >> letra;
+                        cout << "Numero (1-10):" << endl;
+                        cin >> num;
+                        sprintf(sendBuff, "%c", letra);
+                        send(s, sendBuff, sizeof(sendBuff), 0);
+                        sprintf(sendBuff, "%i", num);
+                        send(s, sendBuff, sizeof(sendBuff), 0);
+                        char res[MAX_LINEAS];
+                        for (int i = 0; i < 10; i++) {
+                            for (int j = 0; j < 10; j++) {
+                                recv(s, recvBuff, sizeof(recvBuff), 0);
+                                sscanf(recvBuff, "%s", res);
+                                printf(res);
+                                printf(" ");
+                            }
+                            printf("\n");
+                        }
+                        recv(s, recvBuff, sizeof(recvBuff), 0);
+                        sscanf(recvBuff, "%c", &dev);
+                    }
+                    cout << "Fin de la Partida" << endl;
+                    continue;
+                } else {
+                    cout << "Usuario o Contrasena Incorrectos" << endl;
+                    continue;
+                }
             }
         }
     } while (c != '3');
