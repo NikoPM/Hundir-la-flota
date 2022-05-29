@@ -1,0 +1,26 @@
+05/29/22 18:42:43
+Usuario Logueado
+Conexion realizada entre servidor y cliente
+Registrar Usuario
+Nombre Usuario recibido: a
+Contrasenya Usuario recibida: a
+Usuario Registrado
+Programa Finalizado
+
+05/29/22 18:44:03
+Usuario Logueado
+Conexion realizada entre servidor y cliente
+Registrar Usuario
+Nombre Usuario recibido: a
+Contrasenya Usuario recibida: a
+Usuario Registrado
+Programa Finalizado
+
+05/29/22 18:46:28
+Usuario Logueado
+Conexion realizada entre servidor y cliente
+Registrar Usuario
+Nombre Usuario recibido: a
+Contrasenya Usuario recibida: a
+Usuario Registrado
+Programa Finalizado
